@@ -101,7 +101,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Курсы\ИТМО. Автоматизация информационного поделирования\Модуль 5\RevitAPITrainingLibrary\RevitAPITrainingLibrary\RevitAPITrainingLibrary.csproj">
+    <ProjectReference Include="..\..\RevitAPITrainingLibrary\RevitAPITrainingLibrary\RevitAPITrainingLibrary.csproj">
       <Project>{74117af7-9621-44dc-b6ae-9432592d5b37}</Project>
       <Name>RevitAPITrainingLibrary</Name>
     </ProjectReference>
