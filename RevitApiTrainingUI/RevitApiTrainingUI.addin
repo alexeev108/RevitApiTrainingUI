@@ -5,6 +5,6 @@
 		<AddInId>A6993B6E-8B4D-4983-A432-D750E8B7779D</AddInId>		
 		<FullClassName>RevitApiTrainingUI.Main</FullClassName>
 		<VendorId>ADSK</VendorId>
-		<Text>Поменять тип стенs</Text>
+		<Text>Поменять тип стен</Text>
 	</AddIn>
 </RevitAddIns>
