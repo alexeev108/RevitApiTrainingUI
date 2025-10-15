@@ -18,15 +18,15 @@ namespace RevitApiTrainingUI
 
         public DelegateCommand SaveCommand { get; }
         public List<Element> PickedObjects { get; } = new List<Element>();
-        public List<PipingSystemType> PipeSystems { get; } = new List<PipingSystemType>();
-        public PipingSystemType SelectedPipeSystem { get; set; }
+        public List<WallType> WallTypes { get; } = new List<WallType>();
+        public WallType SelectedWallType { get; set; }
 
         public MainViewViewModel(ExternalCommandData commandData)
         {
              _commandData = commandData;
             SaveCommand = new DelegateCommand(OnSaveCommand);
             PickedObjects = SelectionUtils.PickObjects(commandData);
-            PipeSystems = PipesUtils.GetPipeSystems(commandData);
+            WallTypes = WallsUtils.GetWallTypes(commandData);
         }
 
         private void OnSaveCommand()
@@ -35,18 +35,19 @@ namespace RevitApiTrainingUI
             UIDocument uIDocument = uiApplication.ActiveUIDocument;
             Document document = uIDocument.Document;
 
-            if (PickedObjects.Count() == 0 || SelectedPipeSystem == null)
+            if (PickedObjects.Count() == 0 || SelectedWallType == null)
                 return;
 
-            using (var ts = new Transaction(document, "Set system type"))
+            using (var ts = new Transaction(document, "Set wall type"))
             {
                 ts.Start();
                 foreach (var pickedObject in PickedObjects)
                 {
-                    if (pickedObject is Pipe)
+                    if (pickedObject is Wall)
                     {
-                        var pipe = pickedObject as Pipe;
-                        pipe.SetSystemType(SelectedPipeSystem.Id);
+                        var wall = pickedObject as Wall;
+
+                        wall.WallType = SelectedWallType;
                     }
                 }
                 ts.Commit();
