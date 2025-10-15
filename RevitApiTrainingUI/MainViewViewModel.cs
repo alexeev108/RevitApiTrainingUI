@@ -58,10 +58,10 @@ namespace RevitApiTrainingUI
 
             foreach (Element element in selectedElement)
             {
-                sumVolume += Math.Round(element.get_Parameter(BuiltInParameter.HOST_VOLUME_COMPUTED).AsDouble(), 2);
+                sumVolume += element.get_Parameter(BuiltInParameter.HOST_VOLUME_COMPUTED).AsDouble();
             }
 
-            double fromUnits = UnitUtils.ConvertFromInternalUnits(sumVolume, UnitTypeId.CubicMeters);
+            double fromUnits = Math.Round(UnitUtils.ConvertFromInternalUnits(sumVolume, UnitTypeId.CubicMeters), 2);
 
             TaskDialog.Show("Сообшение", $"Объем всех стен: {fromUnits} м3");
 
