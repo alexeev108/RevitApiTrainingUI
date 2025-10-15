@@ -15,13 +15,17 @@ namespace RevitApiTrainingUI
     {
         private ExternalCommandData _commandData;
 
-        public DelegateCommand SelectCommand { get; }
+        public DelegateCommand PipesQuantity { get; }
+        public DelegateCommand WallsVolume { get; }
+        public DelegateCommand DoorsQuantity { get; }
 
         public MainViewViewModel(ExternalCommandData commandData)
         {
              _commandData = commandData;
-            SelectCommand = new DelegateCommand(OnSelectCommand);
-        }
+            PipesQuantity = new DelegateCommand(OnSelectCommandPipes);
+            WallsVolume = new DelegateCommand(OnSelectCommandWalls);
+            DoorsQuantity = new DelegateCommand(OnSelectCommandDoors);
+        }        
 
         public event EventHandler HideRequest;
         private void RaiseHideRequest()
@@ -35,16 +39,43 @@ namespace RevitApiTrainingUI
             ShowRequest?.Invoke(this, EventArgs.Empty);
         }
 
-        private void OnSelectCommand()
+        private void OnSelectCommandPipes()
         {
             RaiseHideRequest();
-            Element selectedElement = SelectionUtils.PickObject(_commandData);
+            List<Element> selectedElement = SelectionUtils.PipesSelection(_commandData);
 
-            TaskDialog.Show("Сообшение", $"ID: {selectedElement.Id}");
+            TaskDialog.Show("Сообшение", $"Количество всех труб: {selectedElement.Count} шт.");
 
             RaiseShowRequest();
         }
 
-        
+        private void OnSelectCommandWalls()
+        {
+            RaiseHideRequest();
+            List<Element> selectedElement = SelectionUtils.WallsSelection(_commandData);
+
+            double sumVolume = 0;
+
+            foreach (Element element in selectedElement)
+            {
+                sumVolume += Math.Round(element.get_Parameter(BuiltInParameter.HOST_VOLUME_COMPUTED).AsDouble(), 2);
+            }
+
+            double fromUnits = UnitUtils.ConvertFromInternalUnits(sumVolume, UnitTypeId.CubicMeters);
+
+            TaskDialog.Show("Сообшение", $"Объем всех стен: {fromUnits} м3");
+
+            RaiseShowRequest();
+        }
+
+        private void OnSelectCommandDoors()
+        {
+            RaiseHideRequest();
+            List<Element> selectedElement = SelectionUtils.DoorsSelection(_commandData);
+
+            TaskDialog.Show("Сообшение", $"Количество всех дверей: {selectedElement.Count} шт.");
+
+            RaiseShowRequest();
+        }
     }
 }

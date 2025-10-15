@@ -26,7 +26,7 @@ namespace RevitApiTrainingUI
             InitializeComponent();
             MainViewViewModel vm = new MainViewViewModel(externalCommandData);
             vm.HideRequest += (s,e) => this.Hide();
-            vm.ShowRequest += (s, e) => this.Show();
+            vm.ShowRequest += (s,e) => this.Show();
             DataContext = vm;
         }
     }

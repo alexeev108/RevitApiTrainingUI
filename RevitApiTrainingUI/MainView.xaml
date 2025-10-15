@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RevitApiTrainingUI"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="300"
-        Title="Идентификатор элемента">
-    <StackPanel>
-        <Label Content="Узнать ID элемента" Margin="5"/>
-        <Button Content="Выбрать" Command="{Binding SelectCommand}" Margin="5"/>
+             d:DesignHeight="150" d:DesignWidth="200"
+        Title="Информация об элементах">
+    <StackPanel>        
+        <Button Content="Узнать количество труб" Command="{Binding PipesQuantity}" Margin="5"/>
+        <Button Content="Узнать объем всех стен" Command="{Binding WallsVolume}" Margin="5"/>
+        <Button Content="Узнать количество дверей" Command="{Binding DoorsQuantity}" Margin="5"/>
     </StackPanel>
 </Window>
