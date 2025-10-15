@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RevitAddIns>
 	<AddIn Type="Command">
-		<Assembly>"C:\Users\alex206\Desktop\RevitApiTrainingUI\RevitApiTrainingUIWall.dll"</Assembly>		
+		<Assembly>"C:\Users\alex206\Desktop\RevitApiTrainingUI\RevitApiTrainingUI.dll"</Assembly>		
 		<AddInId>A6993B6E-8B4D-4983-A432-D750E8B7779D</AddInId>		
 		<FullClassName>RevitApiTrainingUI.Main</FullClassName>
 		<VendorId>ADSK</VendorId>
